@@ -1,10 +1,18 @@
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-
-// these are all epic actions, like written in the above example
+import { appLoadEpic } from './features/app/app.epics';
+import {
+  notificationFetchPokemonEpic,
+  notificationFavouritePokemonEpic,
+  hideNotificationEpic,
+} from './components/notification/notification.epics';
 import { fetchPokemonsEpic } from './features/pokemon-list/pokemon-list.epics';
 
-//this combineEpics function simple takes each epic as an argument and creates a single root 'epic'
-const rootEpic = combineEpics(fetchPokemonsEpic);
+const rootEpic = combineEpics(
+  fetchPokemonsEpic,
+  appLoadEpic,
+  notificationFetchPokemonEpic,
+  notificationFavouritePokemonEpic,
+  hideNotificationEpic,
+);
 
-// createEpicMiddleware wraps your combined epic, and creates the hooks for it listen to redux's middlware system
 export const epicMiddleware = createEpicMiddleware(rootEpic);

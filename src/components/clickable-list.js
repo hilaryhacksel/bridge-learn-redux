@@ -6,11 +6,7 @@ import React from 'react';
 
 export const ClickableList = ({ data, onClickItem, isLoadingList }) =>
   isLoadingList ? (
-    <img
-      src="loading.gif"
-      style={{ height: 200, width: 200 }}
-      role="presentation"
-    />
+    <img src="loading.gif" style={{ height: 200, width: 200 }} alt="loader" />
   ) : (
     <ul>
       {data.map((item, index) => (
